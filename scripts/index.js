@@ -2,18 +2,9 @@ let comments = [];
 
 const checkSpam = (str) => {
 
-    let lowerStr = str.toLowerCase();
-
-    if (lowerStr.includes('viagra')||lowerStr.includes('xxx'))
-
-    {
-        let newstr = str.replace(/viagra|xxx/ig, "***");
-        return newstr;
-    }   
-        else
-        { 
-            return str;
-        }
+  let newstr = str.replace(/viagra|xxx/ig, "***");
+  return newstr;
+        
 }
 
 
@@ -22,13 +13,12 @@ const checkSpam = (str) => {
 
 
 function generate() {
-
-    let block = "";
-    for (let c of comments) {
-        block += `<div>${c}</div><hr>`;
-
-    }
-    document.getElementById('container-comment').innerHTML = block;
+ 
+    for (let c of comments) 
+      { let p = document.createElement("p");
+       p.innerHTML=`${c}<hr>`;
+       document.getElementById('container-comment').appendChild(p);}
+    
 
 }
 
@@ -42,7 +32,7 @@ function newComment() {
 
     generate();
     document.getElementById("newcomment").value = "";
-};
+}
 
 
 
@@ -50,3 +40,7 @@ function newComment() {
 
 
 document.getElementById('btn').addEventListener("click", newComment);
+
+
+/* В фунции checkSpam можно и не делать проверку а сразу вызвать функцию replace, если совпадения не найдутся, что она и так вернет ту же строку
+Писать разметку в JS коде не очень хорошая практика block += `<div>${c}</div><hr>`;, лучше воспользовать функцией createElement  */
